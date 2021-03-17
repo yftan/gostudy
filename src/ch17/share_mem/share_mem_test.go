@@ -1,6 +1,7 @@
 package share_mem
 
 import (
+	"fmt"
 	"sync"
 	"testing"
 	"time"
@@ -15,6 +16,23 @@ func TestCounter(t *testing.T) {
 	}
 	time.Sleep(1 * time.Second)
 	t.Logf("counter = %d", counter)
+}
+
+func TestCounter1(t *testing.T) {
+	counter := 0
+	var mutex sync.Mutex
+	var wg sync.WaitGroup
+	for i := 0; i < 100000; i++ {
+		wg.Add(1)
+		go func() {
+			mutex.Lock()
+			counter++
+			mutex.Unlock()
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+	fmt.Println(counter)
 }
 
 func TestCounterThreadSafe(t *testing.T) {
@@ -51,4 +69,3 @@ func TestCounterWaitGroup(t *testing.T) {
 	wg.Wait()
 	t.Logf("counter = %d", counter)
 }
-
