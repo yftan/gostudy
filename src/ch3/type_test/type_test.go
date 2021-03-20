@@ -1,4 +1,4 @@
-package type_test
+package type_test_my_test
 
 import "testing"
 

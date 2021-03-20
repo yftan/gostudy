@@ -55,7 +55,7 @@ func TestDefer(t *testing.T) {
 		t.Log("Clean resources")
 	}()
 	t.Log("Started")
-	panic("Fatal error")
+	//panic("Fatal error")
 	t.Log("final")
 }
 

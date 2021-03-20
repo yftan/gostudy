@@ -1,6 +1,9 @@
 package condition
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 /**
 08 条件和循环
@@ -61,6 +64,19 @@ func TestSwitchCondition(t *testing.T) {
 			t.Log("Odd")
 		default:
 			t.Log("unknow")
+		}
+	}
+}
+
+func TestNum(t *testing.T) {
+	for i:= 0 ; i <5; i++ {
+		switch {
+		case i%2 == 0:
+			fmt.Println("Even")
+		case i%2 == 1:
+			fmt.Println("Odd")
+		default:
+			fmt.Println("error")
 		}
 	}
 }

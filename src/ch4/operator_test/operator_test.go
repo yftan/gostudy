@@ -31,9 +31,12 @@ func TestCompareArray(t *testing.T) {
  */
 
 func TestBitClear(t *testing.T) {
+	// 将运算符左边数据相异的位保留，相同位清零。
 	a := 7 // 0111
-	a = a &^ Readable
+	a = a &^ Readable // 0111 &^ 0001
+	t.Log(a)
 	a = a &^ Executable
+	t.Log(a)
 	t.Log(a & Readable, a & Wirtable, a & Executable)
 	t.Log(a & Readable == Readable, a & Wirtable == Wirtable, a & Executable == Executable)
 }
