@@ -29,3 +29,24 @@ func TestEmbeddedJson(t *testing.T) {
 		t.Error(err)
 	}
 }
+
+var jsonStr1 = `{
+	"base":{
+		"name":"tyf",
+		"age":29
+	},
+	"skills":{
+		"technologies":["Java","Go","C"]
+	}
+}`
+
+func TestMyJson(t *testing.T) {
+	person := new(Person)
+	json.Unmarshal([]byte(jsonStr1), person)
+	t.Log(person)
+	if marshal, err := json.Marshal(person); err != nil {
+		t.Error("出错")
+	} else {
+		t.Log(string(marshal))
+	}
+}

@@ -31,9 +31,9 @@ func TestBasicType(t *testing.T) {
 }
 
 type Employee struct {
-	EmployeeID	string
-	Name		string	`format:"normal"`
-	Age			int
+	EmployeeID string
+	Name       string `format:"normal"`
+	Age        int
 }
 
 func (e *Employee) UpdateAge(newVal int) {
@@ -41,9 +41,9 @@ func (e *Employee) UpdateAge(newVal int) {
 }
 
 type Customer struct {
-	CookieID	string
-	Name		string
-	Age			int
+	CookieID string
+	Name     string
+	Age      int
 }
 
 func TestInvokeByName(t *testing.T) {
@@ -58,4 +58,11 @@ func TestInvokeByName(t *testing.T) {
 	reflect.ValueOf(e).MethodByName("UpdateAge").
 		Call([]reflect.Value{reflect.ValueOf(1)})
 	t.Log("Updated Age:", e)
+}
+
+func TestReflect(t *testing.T) {
+	e := Employee{EmployeeID: "2", Name: "tyf", Age: 29}
+	reflect.ValueOf(e).MethodByName("UpdateAge").
+		Call([]reflect.Value{reflect.ValueOf(1)})
+	fmt.Println(e.Age)
 }

@@ -18,6 +18,7 @@ func AllResponse() string {
 	ch := make(chan string, numOfRunner)
 	for i := 0; i < numOfRunner; i++ {
 		go func(i int) {
+			time.Sleep(5 * time.Second)
 			ret := runTask(i)
 			ch <- ret
 		}(i)
@@ -32,6 +33,5 @@ func AllResponse() string {
 func TestFirstResponse(t *testing.T) {
 	t.Log("Before:", runtime.NumGoroutine())
 	t.Log(AllResponse())
-	time.Sleep(time.Second * 1)
 	t.Log("After:", runtime.NumGoroutine())
 }

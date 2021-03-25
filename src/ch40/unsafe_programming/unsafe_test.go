@@ -21,7 +21,7 @@ type MyInt int
 
 //合理的类型转换
 func TestConvert(t *testing.T) {
-	a := []int{1,2,3,4}
+	a := []int{1, 2, 3, 4}
 	b := *(*[]MyInt)(unsafe.Pointer(&a))
 	t.Log(b)
 }
@@ -38,7 +38,7 @@ func TestAtomic(t *testing.T) {
 	}
 	readDataFn := func() {
 		data := atomic.LoadPointer(&shareBufPtr)
-		t.Log(data,*(*[]int)(data))
+		t.Log(data, *(*[]int)(data))
 		fmt.Println(data, *(*[]int)(data))
 	}
 	var wg sync.WaitGroup
@@ -62,4 +62,22 @@ func TestAtomic(t *testing.T) {
 		}()
 	}
 	time.Sleep(time.Second * 1)
+}
+
+func TestUnsafe1(t *testing.T) {
+	u := new(user)
+	fmt.Println(*u)
+
+	pName := (*string)(unsafe.Pointer(u))
+	*pName = "张三"
+
+	pAge := (*int)(unsafe.Pointer(uintptr(unsafe.Pointer(u)) + unsafe.Offsetof(u.age)))
+	*pAge = 20
+
+	fmt.Println(*u)
+}
+
+type user struct {
+	name string
+	age  int
 }
